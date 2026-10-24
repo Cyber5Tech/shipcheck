@@ -2,40 +2,64 @@
 
 ShipCheck is a small, dependency-free command-line tool for checking whether a repository has the basics people expect from an open-source project.
 
-It checks for:
+## Installation
 
-- A `README.md`
-- An OSI-approved license file (`LICENSE` or `LICENSE.md`)
-- A contribution guide
-- A code of conduct
-- A security policy
-- Issue templates or a pull-request template
-- A CI workflow
-
-## Quick start
-
-Run it directly from a checkout:
-
-```console
-python -m shipcheck .
-```
-
-Or install the package in editable mode:
+ShipCheck supports Python 3.9 and newer. From a local clone, install it in editable mode:
 
 ```console
 python -m pip install -e .
+```
+
+## Usage
+
+Check the current repository:
+
+```console
 shipcheck .
 ```
 
-Use `--json` in automation:
+Check another repository by providing its path:
+
+```console
+shipcheck C:\path\to\repository
+```
+
+Use JSON output in scripts and CI jobs:
 
 ```console
 shipcheck . --json
 ```
 
-The command exits with status `0` when all checks pass and `1` when one or more checks fail.
+If you do not want to install the package, run it directly from a checkout by setting the source path:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m shipcheck .
+```
+
+## Checks
+
+ShipCheck looks for:
+
+- A `README`, `README.md`, or `README.rst`
+- An OSI-approved license file (`LICENSE`, `LICENSE.md`, or `LICENSE.txt`)
+- A contribution guide
+- A code of conduct
+- A security policy
+- An issue template or pull-request template
+- A continuous-integration workflow
+
+Each check reports `PASS` or `FAIL` with a next step for missing files.
+
+## Exit codes
+
+- `0` — all checks pass
+- `1` — one or more checks fail
+- `2` — the supplied path is not a directory
 
 ## Development
+
+Run the test suite from the project root:
 
 ```console
 python -m unittest discover -s tests -v
