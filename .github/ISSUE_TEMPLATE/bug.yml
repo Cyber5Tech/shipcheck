@@ -1,0 +1,10 @@
+name: Bug report
+description: Report a reproducible problem with ShipCheck.
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Include the command, repository shape, and observed output.
+    validations:
+      required: true
